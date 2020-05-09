@@ -1,0 +1,33 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/springcloud?serverTimezone=GMT%2B8
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  application:
+    name: service-provider
+  main:
+    allow-bean-definition-overriding: true
+
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  type-aliases-package: com.cn.springcloudprovider.entity
+  mapper-locations: mapper/*.xml
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10001/eureka
+    register-with-eureka: true
+  instance:
+    lease-expiration-duration-in-seconds: 10
+    lease-renewal-interval-in-seconds: 5
+
+swagger:
+  base-package: cn.com.springcloudprovider

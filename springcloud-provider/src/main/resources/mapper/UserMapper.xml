@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cn.springcloudprovider.mapper.UserMapper">
+    <resultMap id="UserMap" type="com.cn.springcloudprovider.entity.User">
+        <result property="uId" column="u_id" jdbcType="VARCHAR"/>
+        <result property="uUsername" column="u_username" jdbcType="VARCHAR"/>
+        <result property="uPassword" column="u_password" jdbcType="VARCHAR"/>
+        <result property="uName" column="u_name" jdbcType="VARCHAR"/>
+        <result property="uPhone" column="u_phone" jdbcType="VARCHAR"/>
+        <result property="uEmail" column="u_email" jdbcType="VARCHAR"/>
+        <result property="uNormal" column="u_normal" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询所有用户-->
+    <select id="queryUserAll" resultMap="UserMap">
+        select * from user
+    </select>
+
+    <!--添加用户-->
+    <insert id="addUser">
+        insert into user(
+        u_id,u_username,u_password,u_name,u_normal,
+        <trim suffixOverrides=",">
+            <if test='uPhone != null and uPhone != "" and uPhone !=" "'>
+                u_phone,
+            </if>
+            <if test='uEmail != null and uEmail != "" and uEmail !=" "'>
+                u_email
+            </if>
+        </trim>
+        ) values(
+        replace(UUID(),'-',''),#{uUsername},#{uPassword},#{uName},'正常',
+        <trim suffix=")" suffixOverrides=",">
+            <if test='uPhone != null and uPhone != "" and uPhone !=" "'>
+                #{uPhone},
+            </if>
+            <if test='uEmail != null and uEmail != "" and uEmail !=" "'>
+                #{uEmail}
+            </if>
+        </trim>
+    </insert>
+</mapper>

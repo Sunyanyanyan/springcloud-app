@@ -1,0 +1,18 @@
+server:
+  port: 10001
+spring:
+  application:
+    name: springcloud-eureka # 作为微服务名称注入到eureka容器
+
+eureka:
+  client:
+    service-url:
+      #设置与Eureka Server交互的地址查询服务和注册服务都需要依赖这个地址
+      defaultZone: http://admin:123456@localhost:10001/eureka  #defaultZone: http://localhost:${server.port}/eureka  相互注册只需端口对应
+    #false表示不向注册中心注册自己
+    register-with-eureka: false
+    #false表示自己端就是注册中心，职责就是维护服务实例，并不需要去检索服务
+    fetch-registry: false
+  server:
+    eviction-interval-timer-in-ms: 5000 # 剔除无效连接时间 0.5s
+    enable-self-preservation: false #关闭自我保护状态
