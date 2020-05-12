@@ -25,6 +25,7 @@
         <module>springcloud-eureka</module>
         <module>springcloud-provider</module>
         <module>springcloud-consumer</module>
+        <module>springcloud-zuul</module>
     </modules>
 
     <dependencyManagement>
@@ -139,6 +140,7 @@
                 <version>1.4.1</version>
             </dependency>
         </dependencies>
+
     </dependencyManagement>
 
     <build>

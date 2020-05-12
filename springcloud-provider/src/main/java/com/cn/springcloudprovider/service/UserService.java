@@ -12,4 +12,6 @@ public interface UserService {
     Result<User> addUser(User user);
 
     Result<User> queryUserAll();
+
+    Result<User> queryUserByName(User user);
 }

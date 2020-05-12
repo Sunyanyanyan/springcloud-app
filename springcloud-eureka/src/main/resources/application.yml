@@ -13,6 +13,7 @@ eureka:
     register-with-eureka: false
     #false表示自己端就是注册中心，职责就是维护服务实例，并不需要去检索服务
     fetch-registry: false
+
   server:
     eviction-interval-timer-in-ms: 5000 # 剔除无效连接时间 0.5s
     enable-self-preservation: false #关闭自我保护状态

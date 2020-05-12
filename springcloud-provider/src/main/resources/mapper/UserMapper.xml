@@ -19,6 +19,11 @@
         select * from user
     </select>
 
+    <!--根据用户名查询用户信息-->
+    <select id="queryUserByName" resultMap="UserMap">
+        select *from user where u_username=#{uUsername}
+    </select>
+
     <!--添加用户-->
     <insert id="addUser">
         insert into user(
@@ -42,4 +47,31 @@
             </if>
         </trim>
     </insert>
+
+    <select id="queryCountUser" resultType="int">
+        select count(1) from user
+        <where>
+            <if test='uId != null and uId != "" and uId !=" "'>
+                u_id=#{uId}
+            </if>
+            <if test='uUsername != null and uUsername != "" and uUsername !=" "'>
+                and u_username=#{uUsername}
+            </if>
+            <if test='uPassword != null and uPassword != "" and uPassword !=" "'>
+                and u_password=#{uPassword}
+            </if>
+            <if test='uName != null and uName != "" and uName !=" "'>
+                and u_name=#{uName}
+            </if>
+            <if test='uPhone != null and uPhone != "" and uPhone !=" "'>
+                and u_phone=#{uPhone}
+            </if>
+            <if test='uEmail != null and uEmail != "" and uEmail !=" "'>
+                and u_email=#{uEmail}
+            </if>
+            <if test='uNormal != null and uNormal != "" and uNormal !=" "'>
+                and u_normal=#{uNormal}
+            </if>
+        </where>
+    </select>
 </mapper>

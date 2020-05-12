@@ -1,0 +1,19 @@
+server:
+  port: 11000
+spring:
+  application:
+    name: zuuldemo
+zuul:
+  routes:
+    service-provider: /provider/** #路由名称 一般写服务名
+    service-consumer: /consumer/**
+      #path: /service-provider/**
+      #url: http://localhost:8081
+    #serviceId: service-provider
+  prefix: /api
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10001/eureka
+
+
