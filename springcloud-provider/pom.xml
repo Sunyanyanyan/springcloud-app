@@ -9,7 +9,7 @@
     </parent>
 
     <artifactId>springcloud-provider</artifactId>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
     <name>springcloud-provider</name>
     <description>Demo project for Spring Boot</description>
 
@@ -19,11 +19,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <!--<dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
             <scope>provided</scope>
-        </dependency>-->
+        </dependency>
 
         <!-- 整合mybatis -->
         <dependency>
