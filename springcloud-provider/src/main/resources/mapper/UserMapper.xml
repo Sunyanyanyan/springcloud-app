@@ -74,4 +74,36 @@
             </if>
         </where>
     </select>
+    <update id="updateUserByUid">
+        update user set
+        <trim suffixOverrides=",">
+            <if test='uUsername != null and uUsername != "" and uUsername !=" "'>
+                u_username=#{uUsername},
+            </if>
+            <if test='uPassword != null and uPassword != "" and uPassword !=" "'>
+                u_password=#{uPassword},
+            </if>
+            <if test='uName != null and uName != "" and uName !=" "'>
+                u_name=#{uName},
+            </if>
+            <if test='uPhone != null and uPhone != "" and uPhone !=" "'>
+                u_phone=#{uPhone},
+            </if>
+            <if test='uEmail != null and uEmail != "" and uEmail !=" "'>
+                u_email=#{uEmail}
+            </if>
+            <if test='uNormal != null and uNormal != "" and uNormal !=" "'>
+                u_normal=#{uNormal}
+            </if>
+        </trim>
+        where u_id=#{uId}
+    </update>
+    <delete id="deleteUserByUid" >
+        delete from user where u_id=#{uId}
+    </delete>
+
+    <select id="loginUser" resultMap="UserMap">
+        select * from user where u_username=#{uUsername} and u_password=#{uPassword}
+    </select>
+
 </mapper>

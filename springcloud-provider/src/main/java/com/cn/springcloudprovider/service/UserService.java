@@ -14,4 +14,10 @@ public interface UserService {
     Result<User> queryUserAll();
 
     Result<User> queryUserByName(User user);
+
+    Result<User> updateUserByUid(User user);
+
+    Result<User> deleteUserByUid(String uId);
+
+    Result<User> loginUser(User user);
 }

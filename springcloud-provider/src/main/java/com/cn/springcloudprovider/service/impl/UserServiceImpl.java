@@ -11,7 +11,6 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -74,6 +73,50 @@ public class UserServiceImpl implements UserService {
             result=new Result("get",new NumberData(count,list));
         } catch (Exception e) {
             result=new Result(new CodeMsg(HttpStatus.SC_INTERNAL_SERVER_ERROR,"请求失败"));
+        }
+        return result;
+    }
+
+    @Override
+    public Result<User> updateUserByUid(User user) {
+        log.info("-----------updateUserByUid-------");
+        int count = 0;
+        try {
+            count = userMapper.updateUserByUid(user);
+            result = new Result("put", new NumberData(count, null));
+        } catch (Exception e) {
+            result = new Result(new CodeMsg(HttpStatus.SC_INTERNAL_SERVER_ERROR, "请求失败"));
+        }
+        return result;
+    }
+
+    @Override
+    public Result<User> deleteUserByUid(String uId) {
+        log.info("-----------  deleteUserByUid-------");
+        int count = 0;
+        try {
+            count = userMapper.deleteUserByUid(uId);
+            result = new Result("delete", new NumberData(count, null));
+        } catch (Exception e) {
+            result = new Result(new CodeMsg(HttpStatus.SC_INTERNAL_SERVER_ERROR, "请求失败"));
+        }
+        return result;
+    }
+
+    @Override
+    public Result<User> loginUser(User user) {
+        int count  = 0;
+        try {
+            List<User> list = userMapper.loginUser(user);
+            count = userMapper.queryCountUser(user);
+
+            if (!"正常".equals(list.get(0).getUNormal())) {
+                result = new Result(new CodeMsg(HttpStatus.SC_INTERNAL_SERVER_ERROR, "您的账号已被锁定， 请联系管理员"));
+                return result;
+            }
+            result = new Result("post", new NumberData(count, list));
+        } catch (Exception e) {
+            result = new Result(new CodeMsg(HttpStatus.SC_INTERNAL_SERVER_ERROR, "请求失败， 账号或密码错误"));
         }
         return result;
     }

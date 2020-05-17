@@ -1,9 +1,7 @@
 package com.cn.springcloudprovider.mapper;
 
 import com.cn.springcloudprovider.entity.User;
-import com.cn.springcloudprovider.vo.Result;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -31,4 +29,20 @@ public interface UserMapper {
      * 查询所有用户
      */
     List<User> queryUserAll();
+
+
+    /**
+     * 修改用户
+     */
+    int updateUserByUid(User user);
+
+    /**
+     * 删除用户
+     */
+    int deleteUserByUid(String uId);
+
+    /**
+     * 用户登录
+     */
+    List<User> loginUser(User user);
 }
